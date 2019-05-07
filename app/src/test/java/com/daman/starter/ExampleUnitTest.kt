@@ -1,7 +1,6 @@
 package com.daman.starter
 
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**
