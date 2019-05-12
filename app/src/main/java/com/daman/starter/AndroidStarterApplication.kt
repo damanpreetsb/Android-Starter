@@ -23,7 +23,6 @@ class AndroidStarterApplication : Application(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         initDI()
-        initSharedPreferences()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
@@ -36,8 +35,6 @@ class AndroidStarterApplication : Application(), HasActivityInjector {
             .build()
         component.inject(this)
     }
-
-    private fun initSharedPreferences() = AppPreferences.init(this)
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 }

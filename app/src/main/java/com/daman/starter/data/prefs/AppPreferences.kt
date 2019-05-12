@@ -1,21 +1,23 @@
 package com.daman.starter.data.prefs
 
-import android.content.Context
 import android.content.SharedPreferences
 import com.daman.starter.utils.PREF_NAME
-import com.daman.starter.utils.PREF_SHARED_PREFS_NAME
 import com.daman.starter.utils.PREF_USER_ID
+import com.daman.starter.utils.empty
 
-object AppPreferences {
-    private const val NAME = PREF_SHARED_PREFS_NAME
-    private const val MODE = Context.MODE_PRIVATE
-    private lateinit var preferences: SharedPreferences
+class AppPreferences(private val preferences: SharedPreferences) : AppSettings {
+    override fun getString(key: String): String =
+        preferences.getString(key, String.empty()) ?: String.empty()
 
-    private val USER_ID = Pair(PREF_USER_ID, "")
-    private val USER_NAME = Pair(PREF_NAME, "")
+    override fun set(key: String, value: String) {
+        preferences.edit { it.putString(key, value) }
+    }
 
-    fun init(context: Context) {
-        preferences = context.getSharedPreferences(NAME, MODE)
+    override fun getBoolean(key: String): Boolean =
+        preferences.getBoolean(key, false)
+
+    override fun set(key: String, value: Boolean) {
+        preferences.edit { it.putBoolean(key, value) }
     }
 
     /**
@@ -27,20 +29,4 @@ object AppPreferences {
         operation(editor)
         editor.apply()
     }
-
-    var userId: String
-        // custom getter to get a preference of a desired type, with a predefined default value
-        get() = preferences.getString(USER_ID.first, USER_ID.second) ?: ""
-
-        // custom setter to save a preference back to preferences file
-        set(value) = preferences.edit {
-            it.putString(USER_ID.first, value)
-        }
-
-    var userName: String
-        get() = preferences.getString(USER_NAME.first, USER_NAME.second) ?: ""
-
-        set(value) = preferences.edit {
-            it.putString(USER_NAME.first, value)
-        }
 }
