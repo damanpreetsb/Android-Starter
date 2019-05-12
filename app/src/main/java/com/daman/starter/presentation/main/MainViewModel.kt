@@ -19,11 +19,10 @@ class MainViewModel @Inject constructor(
         mainUseCase.getUserList()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe({
-                userList.value = it
-            }, {
-                it.printStackTrace()
-            })
+            .subscribe(
+                { userList.value = it },
+                { it.printStackTrace() }
+            )
             .addTo(disposable)
     }
 }

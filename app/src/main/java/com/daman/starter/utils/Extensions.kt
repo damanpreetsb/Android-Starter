@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.widget.Toast
 
+fun String.Companion.empty(): String = ""
+
 fun String.toast(context: Context) = Toast.makeText(context, this, Toast.LENGTH_LONG).show()
 
 val Int.dp: Int
