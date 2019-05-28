@@ -4,6 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.daman.starter.R
+import com.daman.starter.core.vo.Resource.*
 import com.daman.starter.injection.factory.DaggerViewModelFactory
 import com.daman.starter.presentation.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,8 +28,20 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun handlerViewModel() {
         viewModel.userList.observe(this, Observer {
-            val string = TextUtils.join("," , it)
-            textView.text = string
+            when(it) {
+                is Loading -> {
+                    showLoading()
+                }
+                is Success -> {
+                    hideLoading()
+                    val string = TextUtils.join("," , it.data)
+                    textView.text = string
+                }
+                is Failure -> {
+                    hideLoading()
+                    it.throwable.printStackTrace()
+                }
+            }
         })
     }
 }

@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class MainUseCase @Inject constructor(
     private val mainRepository: MainRepository
-){
+) {
 
-    fun getUserList() : Single<List<User>> {
+    fun getUserList() : Single<ArrayList<User>> {
         return mainRepository.getUserList()
     }
 }

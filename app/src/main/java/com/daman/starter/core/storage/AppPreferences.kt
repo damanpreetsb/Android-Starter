@@ -1,4 +1,4 @@
-package com.daman.starter.data.prefs
+package com.daman.starter.core.storage
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,7 +15,10 @@ object AppPreferences {
     private val USER_NAME = Pair(PREF_NAME, "")
 
     fun init(context: Context) {
-        preferences = context.getSharedPreferences(NAME, MODE)
+        preferences = context.getSharedPreferences(
+            NAME,
+            MODE
+        )
     }
 
     /**

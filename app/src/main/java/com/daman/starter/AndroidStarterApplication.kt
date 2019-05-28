@@ -2,7 +2,7 @@ package com.daman.starter
 
 import android.app.Activity
 import android.app.Application
-import com.daman.starter.data.prefs.AppPreferences
+import com.daman.starter.core.storage.AppPreferences
 import com.daman.starter.injection.component.AppComponent
 import com.daman.starter.injection.component.DaggerAppComponent
 import com.daman.starter.injection.module.AppModule
@@ -32,7 +32,6 @@ class AndroidStarterApplication : Application(), HasActivityInjector {
     private fun initDI() {
         component = DaggerAppComponent
             .builder()
-            .appModule(AppModule(this))
             .build()
         component.inject(this)
     }
